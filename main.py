@@ -12,10 +12,10 @@ def read_config():
 def get_trackor_type_id(trackor_type, domain, token):
     headers = {
         'accept': '*/*',
-        'Authorization': 'Basic ' + token,
+        'Authorization': 'Basic ' + str(token),
     }
     response = requests.get(
-        'https://' + domain + '/api/v3/trackor_types',
+        'https://' + str(domain) + '/api/v3/trackor_types',
         headers=headers,
     )
     trackor_types = response.json()
@@ -32,7 +32,7 @@ def upload_qrcode(qr_code_b, trackor_id, qr_field_name, domain, token):
     params = {'file_name': 'Qr-Code.jpg'}
     files = {'file': qr_code_b}
     requests.post(
-        'https://' + domain + '/api/v3/trackor/' + trackor_id + '/file/' + qr_field_name,
+        'https://' + str(domain) + '/api/v3/trackor/' + str(trackor_id) + '/file/' + str(qr_field_name),
         params=params,
         headers=headers,
         files=files,
@@ -50,7 +50,7 @@ def make_qr_code(url):
 
 def get_trackor_ids(trackor_type, domain, token):
     headers = {
-        'Authorization': 'Basic ' + token,
+        'Authorization': 'Basic ' + str(token),
         'accept': 'application/json', 'Content-Type': 'text/plain',
     }
     params = {
@@ -59,7 +59,7 @@ def get_trackor_ids(trackor_type, domain, token):
     }
     data = 'is_null(HPT_QRCODE)'
     response = requests.post(
-        'https://' + domain + '/api/v3/trackor_types/' + trackor_type + '/trackors/search',
+        'https://' + str(domain) + '/api/v3/trackor_types/' + str(trackor_type) + '/trackors/search',
         params=params,
         headers=headers,
         data=data,
@@ -70,8 +70,7 @@ def start(trackor_type, qr_field_name, domain, token):
     trackor_type_id = get_trackor_type_id(trackor_type, domain, token)
     trackor_ids = get_trackor_ids(trackor_type, domain, token)
     for trackor_id in trackor_ids:
-        print(trackor_id)
-        url = 'https://' + domain + '/form/ConfigAppForm.do?id=' + trackor_id + '&ttid=' + trackor_type_id
+        url = 'https://' + str(domain) + '/form/ConfigAppForm.do?id=' + str(trackor_id) + '&ttid=' + str(trackor_type_id)
         qr_code_b = make_qr_code(url)
         upload_qrcode(qr_code_b, trackor_id, qr_field_name, domain, token)
 
