@@ -27,7 +27,7 @@ def get_trackor_type_id(trackor_type, domain, token):
 def upload_qrcode(qr_code_b, trackor_id, qr_field_name, domain, token):
     headers = {
         'accept': '*/*',
-        'Authorization': f'Basic {token}',
+        'Authorization': 'Basic ' + token,
     }
     params = {'file_name': 'Qr-Code.jpg'}
     files = {'file': qr_code_b}
@@ -50,7 +50,7 @@ def make_qr_code(url):
 
 def get_trackor_ids(trackor_type, domain, token):
     headers = {
-        'Authorization': f'Basic {token}',
+        'Authorization': 'Basic ' + token,
         'accept': 'application/json', 'Content-Type': 'text/plain',
     }
     params = {
