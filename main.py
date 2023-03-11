@@ -1,8 +1,10 @@
 # - *- coding: utf- 8 - *-
 from io import BytesIO
+import subprocess
 import requests
 import qrcode
 import json
+import sys
 
 def read_config():
     file = open('settings.json')
@@ -84,5 +86,6 @@ def start(trackor_type, qr_field_name, domain, token):
         qr_code_b = make_qr_code(url)
         upload_qrcode(qr_code_b, trackor_id, qr_field_name, domain, token)
 
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
 data = read_config()
 start(data["trackor_type"], data["qr_code_field"], data["domain"], data["token"])
