@@ -38,6 +38,16 @@ def upload_qrcode(qr_code_b, trackor_id, qr_field_name, domain, token):
         files=files,
     )
 
+# def make_qr_code(url):
+#     qr = qrcode.QRCode(version=1, box_size=10, border=1)
+#     qr.add_data(url)
+#     qr.make(fit=True)
+#     img = qr.make_image(fill_color="#152B42", back_color="transparent")
+#     img_bytes = BytesIO()
+#     img.save(img_bytes, format='PNG')
+#     img_bytes = img_bytes.getvalue()
+#     return img_bytes
+
 def make_qr_code(url):
     qr = qrcode.QRCode(version=1, box_size=10, border=1)
     qr.add_data(url)
