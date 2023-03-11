@@ -1,1 +1,1 @@
-command = python ./main.py
+command = python ./qr_uploader.py
